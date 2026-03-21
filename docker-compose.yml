@@ -1,0 +1,14 @@
+web:
+  image: nginx
+  container_name: nginx:stable
+  restart: unless-stopped
+  ports:
+   - "80:80"
+  volumes:
+   - ./frontend:/usr/share/nginx/html
+   - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  environment:
+   - NGINX_PORT=80
+  networks:
+    - webnet
+    
