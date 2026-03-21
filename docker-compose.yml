@@ -1,14 +1,66 @@
-web:
-  image: nginx
-  container_name: nginx:stable
-  restart: unless-stopped
-  ports:
-   - "80:80"
-  volumes:
-   - ./frontend:/usr/share/nginx/html
-   - ./nginx.conf:/etc/nginx/conf.d/default.conf
-  environment:
-   - NGINX_PORT=80
-  networks:
-    - webnet
-    
+version: "3.8"
+
+services:
+  prometheus:
+    image: prom/prometheus:main
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - monitor-network
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    ports:
+      - "9100:9100"
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--path.rootfs=/rootfs'
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    networks:
+      - monitor-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    networks:
+      - monitor-network
+
+  nginx:
+    image: nginx:stable
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "81:80"  # якщо треба конкуренція
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - monitor-network
+
+networks:
+  monitor-network:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:
