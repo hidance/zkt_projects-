@@ -1,38 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Monitoring System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Server Monitoring Stack</title>
+  <style>
+    :root {
+      --bg: #f3f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --accent: #2f80ed;
+      --shadow: 0 10px 25px rgba(31, 41, 55, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(170deg, #e3effd 0%, #f7f9fb 100%);
+      color: var(--text);
+    }
+
+    .page {
+      width: min(1080px, 92%);
+      margin: 2.5rem auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #0f172a;
+    }
+
+    p.lead { color: var(--muted); margin: 0.75rem 0 1.8rem; }
+
+    .grid {
+      display: grid;
+      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+      border: 1px solid #e2e8f0;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .card:hover {
+      border-color: #a5b4fc;
+      transform: translateY(-2px);
+    }
+
+    .card h2 {
+      margin: 0 0 0.65rem;
+      font-size: 1.1rem;
+    }
+
+    .card p { margin: .2rem 0 0.9rem; color: var(--muted); }
+
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .note { margin-top: 1.4rem; color: #475569; font-size: 0.95rem; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #dbecff;
+      color: #2056a9;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    footer { text-align: center; margin-top: 2.5rem; font-size: 0.88rem; color: #94a3b8; }
+  </style>
 </head>
+<body>
+  <main class="page">
+    <header>
+      <div class="badge">Server Monitoring System</div>
+      <h1>Docker Monitoring Stack</h1>
+      <p class="lead">Prometheus + Node Exporter + Grafana + Nginx</p>
+    </header>
 
+    <section class="grid">
+      <article class="card">
+        <h2>Prometheus</h2>
+        <p>Збирає метрики з Node Exporter і надає інтерфейс для запитів.</p>
+        <a href="http://localhost:9090" target="_blank" rel="noopener">http://localhost:9090</a>
+      </article>
 
+      <article class="card">
+        <h2>Node Exporter</h2>
+        <p>Метрики CPU, пам’яті, диска та мережі.</p>
+        <a href="http://localhost:9100/metrics" target="_blank" rel="noopener">http://localhost:9100/metrics</a>
+      </article>
 
-    <h1>Server Monitoring System</h1>
-    <p>This is a simple server monitoring application using Docker containers.</p>
-    <p>Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a></p>
-    <p>Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a></p>
-    <p>Node Exporter: <a href="http://localhost:9100" target="_blank">localhost:9100</a></p>
+      <article class="card">
+        <h2>Grafana</h2>
+        <p>Готові дашборди для візуалізації метрик з Prometheus.</p>
+        <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a>
+      </article>
 
+      <article class="card">
+        <h2>Static frontend</h2>
+        <p>Ця сторінка працює через Nginx.</p>
+        <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a>
+      </article>
+    </section>
+
+    <section class="note">
+      <strong>Швидкий старт:</strong>
+      <br>1) ./prepare-app.sh  2) ./start-app.sh  3) ./stop-app.sh  4) ./remove-app.sh
+      <br>Якщо використовуєте `env_file`, додайте `.env` до .gitignore.
+    </section>
+
+    <footer>by zkt_practice - 2026</footer>
+  </main>
 </body>
 </html>
