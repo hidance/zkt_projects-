@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="sk">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Server Monitoring Stack</title>
+  <title>Monitorovací systém servera</title>
   <style>
     :root {
       --bg: #f3f7fb;
@@ -14,7 +15,10 @@
       --shadow: 0 10px 25px rgba(31, 41, 55, 0.08);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -39,7 +43,10 @@
       color: #0f172a;
     }
 
-    p.lead { color: var(--muted); margin: 0.75rem 0 1.8rem; }
+    p.lead {
+      color: var(--muted);
+      margin: 0.75rem 0 1.8rem;
+    }
 
     .grid {
       display: grid;
@@ -66,7 +73,10 @@
       font-size: 1.1rem;
     }
 
-    .card p { margin: .2rem 0 0.9rem; color: var(--muted); }
+    .card p {
+      margin: .2rem 0 0.9rem;
+      color: var(--muted);
+    }
 
     .card a {
       color: var(--accent);
@@ -74,7 +84,11 @@
       font-weight: 600;
     }
 
-    .note { margin-top: 1.4rem; color: #475569; font-size: 0.95rem; }
+    .note {
+      margin-top: 1.4rem;
+      color: #475569;
+      font-size: 0.95rem;
+    }
 
     .badge {
       display: inline-flex;
@@ -88,13 +102,19 @@
       font-weight: 600;
     }
 
-    footer { text-align: center; margin-top: 2.5rem; font-size: 0.88rem; color: #94a3b8; }
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
   </style>
 </head>
+
 <body>
   <main class="page">
     <header>
-      <div class="badge">Server Monitoring System</div>
+      <div class="badge">Monitorovací systém servera</div>
       <h1>Docker Monitoring Stack</h1>
       <p class="lead">Prometheus + Node Exporter + Grafana + Nginx</p>
     </header>
@@ -102,36 +122,37 @@
     <section class="grid">
       <article class="card">
         <h2>Prometheus</h2>
-        <p>Збирає метрики з Node Exporter і надає інтерфейс для запитів.</p>
+        <p>Zbiera metriky z Node Exporter a poskytuje rozhranie na dotazy.</p>
         <a href="http://localhost:9090" target="_blank" rel="noopener">http://localhost:9090</a>
       </article>
 
       <article class="card">
         <h2>Node Exporter</h2>
-        <p>Метрики CPU, пам’яті, диска та мережі.</p>
+        <p>Metriky CPU, pamäte, disku a siete.</p>
         <a href="http://localhost:9100/metrics" target="_blank" rel="noopener">http://localhost:9100/metrics</a>
       </article>
 
       <article class="card">
         <h2>Grafana</h2>
-        <p>Готові дашборди для візуалізації метрик з Prometheus.</p>
+        <p>Pripravené dashboardy na vizualizáciu metrík z Prometheus.</p>
         <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a>
       </article>
 
       <article class="card">
-        <h2>Static frontend</h2>
-        <p>Ця сторінка працює через Nginx.</p>
-        <a href="http://localhost" target="_blank" rel="noopener">http://localhost</a>
+        <h2>Statický frontend</h2>
+        <p>Táto stránka beží cez Nginx.</p>
+        <a href="http://localhost" target="_blank" rel="noopener">http://localhost:81</a>
       </article>
     </section>
 
     <section class="note">
-      <strong>Швидкий старт:</strong>
-      <br>1) ./prepare-app.sh  2) ./start-app.sh  3) ./stop-app.sh  4) ./remove-app.sh
-      <br>Якщо використовуєте `env_file`, додайте `.env` до .gitignore.
+      <strong>Rýchly štart:</strong>
+      <br>1) ./prepare-app.sh 2) ./start-app.sh 3) ./stop-app.sh 4) ./remove-app.sh
+      <br>Ak používate `env_file`, pridajte `.env` do .gitignore.
     </section>
 
     <footer>by zkt_practice - 2026</footer>
   </main>
 </body>
+
 </html>
